@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+html {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Добавьте сюда свои глобальные стили, если нужно. Tailwind utility-классы используйте только в разметке! */

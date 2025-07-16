@@ -1,0 +1,35 @@
+{
+  "name": "BM Filter - Фильтрующие элементы",
+  "short_name": "BM Filter",
+  "description": "Качественные фильтрующие элементы для промышленного применения",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/img/favicon/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/img/favicon/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/favicon/apple-touch-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/favicon/apple-touch-icon-114x114.png",
+      "sizes": "114x114",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["business", "shopping"],
+  "lang": "ru",
+  "dir": "ltr"
+} 
