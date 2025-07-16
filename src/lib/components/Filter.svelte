@@ -202,7 +202,7 @@
           bind:value={filters.heightFrom}
           on:input={handleHeightFromChange}
           placeholder="от"
-          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent flex-1"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent flex-1"
         />
         <span class="flex items-center text-gray-500">—</span>
         <input
@@ -211,7 +211,7 @@
           bind:value={filters.heightTo}
           on:input={handleHeightToChange}
           placeholder="до"
-          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent flex-1"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent flex-1"
         />
       </div>
     </div>
@@ -228,7 +228,7 @@
           bind:value={filters.micronFrom}
           on:input={handleMicronFromChange}
           placeholder="от"
-          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent flex-1"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent flex-1"
         />
         <span class="flex items-center text-gray-500">—</span>
         <input
@@ -237,7 +237,7 @@
           bind:value={filters.micronTo}
           on:input={handleMicronToChange}
           placeholder="до"
-          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent flex-1"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent flex-1"
         />
       </div>
     </div>
@@ -256,7 +256,7 @@
                 id={parameter.id}
                 checked={filters.parameters.includes(parameter.id)}
                 on:change={(e) => handleParameterChange(parameter.id, e)}
-                class="w-5 h-5 text-sky-600 bg-white border-gray-300 rounded focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                class="w-5 h-5 text-gray-600 bg-white border-gray-300 rounded focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               />
               <span class="text-sm text-gray-700">{parameter.label}</span>
             </label>

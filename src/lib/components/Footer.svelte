@@ -13,7 +13,7 @@
       <!-- Company Info -->
       <div class="space-y-4">
         <a href="/" class="inline-block">
-          <img src="/img/logo.png" alt="Логотип" class="h-12 w-auto" />
+          <img src="/images/logo/logo-white.png" alt="Логотип" class="h-12 w-auto" />
         </a>
         <p class="text-gray-400 text-sm">
           ООО «БМ ФИЛЬТР» - Российский производитель современных, качественных фильтроэлементов, фильтродержателей и фильтрационных установок.

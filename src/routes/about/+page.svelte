@@ -48,9 +48,8 @@
     { name: 'Главная', url: '/' },
     { name: 'О компании', url: '/about' }
   ]} />
-  
   <!-- Hero Section -->
-  <div class="bg-gradient-to-r from-sky-600 to-sky-700 text-white rounded-lg p-8 mb-12">
+  <div class="bg-gradient-to-r from-gray-800 to-gray-700 text-white rounded-lg p-8 mb-12">
     <div class="max-w-4xl mx-auto text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">О компании</h1>
       <p class="text-xl md:text-2xl mb-8">

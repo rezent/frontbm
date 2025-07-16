@@ -206,6 +206,7 @@
       height: 'h1',
       rating: 'r1'
     };
+    quantity = 1;
     localStorage.removeItem(`product_options_${productId}`);
   }
   
@@ -266,12 +267,12 @@
             
             <!-- Бейджи -->
             {#if product.isNew}
-              <div class="absolute top-4 left-4 bg-green-500 text-white text-sm px-3 py-1 rounded-full">
+              <div class="absolute top-4 left-4 bg-green-600 text-white text-sm px-3 py-1 rounded-full">
                 Новинка!
               </div>
             {/if}
             {#if product.discount}
-              <div class="absolute top-4 right-4 bg-red-500 text-white text-sm px-3 py-1 rounded-full">
+              <div class="absolute top-4 right-4 bg-red-600 text-white text-sm px-3 py-1 rounded-full">
                 Скидка!
               </div>
             {/if}
@@ -400,9 +401,9 @@
           </div>
           
           {#if !product.inStock}
-            <span class="text-red-500 text-sm">Нет в наличии</span>
+            <span class="text-red-600 text-sm">Нет в наличии</span>
           {:else}
-            <span class="text-green-500 text-sm">В наличии</span>
+            <span class="text-green-600 text-sm">В наличии</span>
           {/if}
         </div>
         
@@ -412,7 +413,7 @@
             <h3 class="text-lg font-semibold text-gray-900">Опции товара</h3>
             <button
               on:click={resetOptions}
-              class="text-sm text-primary-600 hover:text-primary-700 underline"
+              class="text-sm text-sky-600  hover:text-primary-700 underline"
               title="Сбросить к базовым опциям"
             >
               Сбросить
@@ -428,7 +429,7 @@
               <select
                 id="adapter"
                 bind:value={selectedOptions.adapter}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
               >
                 {#each product.options.adapter as option}
                   <option value={option.id}>
@@ -448,7 +449,7 @@
               <select
                 id="height"
                 bind:value={selectedOptions.height}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
               >
                 {#each product.options.height as option}
                   <option value={option.id}>
@@ -468,7 +469,7 @@
               <select
                 id="rating"
                 bind:value={selectedOptions.rating}
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
               >
                 {#each product.options.rating as option}
                   <option value={option.id}>
@@ -497,7 +498,7 @@
               bind:value={quantity}
               on:input={updateQuantity}
               min="1"
-              class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent"
+              class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
             />
             <button
               on:click={increaseQuantity}
@@ -519,9 +520,9 @@
         </button>
         
         <!-- Примечание -->
-        <p class="text-sm text-gray-500 mt-4 text-center">
+        <!-- <p class="text-sm text-gray-500 mt-4 text-center">
           * Под заказ, предоплата 50%
-        </p>
+        </p> -->
       </div>
     </div>
   </div>

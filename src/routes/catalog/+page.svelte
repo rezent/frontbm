@@ -209,14 +209,14 @@
           <div class="flex border border-gray-300 rounded-lg">
             <button
               on:click={() => changeViewMode('grid')}
-              class="p-2 {viewMode === 'grid' ? 'bg-sky-600 text-white' : 'text-gray-600 hover:bg-gray-100'} rounded-l-lg transition-colors"
+                                class="p-2 {viewMode === 'grid' ? 'bg-gray-600 text-white' : 'text-gray-600 hover:bg-gray-100'} rounded-l-lg transition-colors"
               title="Сетка"
             >
               <Grid class="w-5 h-5" />
             </button>
             <button
               on:click={() => changeViewMode('list')}
-              class="p-2 {viewMode === 'list' ? 'bg-sky-600 text-white' : 'text-gray-600 hover:bg-gray-100'} rounded-r-lg transition-colors"
+                                class="p-2 {viewMode === 'list' ? 'bg-gray-600 text-white' : 'text-gray-600 hover:bg-gray-100'} rounded-r-lg transition-colors"
               title="Список"
             >
               <List class="w-5 h-5" />
@@ -245,7 +245,7 @@
                 />
                 <div class="flex-1">
                   <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                    <a href={`/product/${product.id}`} class="hover:text-sky-600 transition-colors">
+                    <a href={`/product/${product.id}`} class="hover:text-gray-600 transition-colors">
                       {product.title}
                     </a>
                   </h3>

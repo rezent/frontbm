@@ -145,7 +145,7 @@
   ]} />
   
   <!-- Hero Section -->
-  <div class="bg-gradient-to-r from-sky-600 to-sky-700 text-white rounded-lg p-8 mb-12">
+  <div class="bg-gradient-to-r  from-gray-800 to-gray-700 text-white rounded-lg p-8 mb-12">
     <div class="max-w-4xl mx-auto text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">Сертификаты качества</h1>
       <p class="text-xl md:text-2xl mb-8">
@@ -229,7 +229,7 @@
                 class="w-full h-48 object-cover"
               />
               <div class="absolute top-2 right-2">
-                <span class="bg-sky-600 text-white px-2 py-1 rounded text-sm">
+                					<span class="bg-gray-600 text-white px-2 py-1 rounded text-sm">
                   {certificate.type}
                 </span>
               </div>
@@ -248,7 +248,7 @@
               <div class="flex space-x-2">
                 <button
                   on:click={() => openCertificate(certificate)}
-                  class="flex-1 bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700 transition-colors flex items-center justify-center"
+                  class="flex-1 bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition-colors flex items-center justify-center"
                 >
                   <Eye class="w-4 h-4 mr-2" />
                   Просмотр

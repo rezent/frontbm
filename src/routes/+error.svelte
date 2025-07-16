@@ -32,8 +32,8 @@
     <div class="mb-8 relative">
       <div class="inline-flex items-center justify-center w-32 h-32 mx-auto mb-6 rounded-full bg-white shadow-2xl border border-gray-200 relative">
         <!-- Пульсирующее кольцо -->
-        <div class="absolute inset-0 rounded-full bg-blue-400 opacity-20 animate-ping"></div>
-        <div class="absolute inset-2 rounded-full bg-blue-300 opacity-30 animate-ping animation-delay-200"></div>
+        <div class="absolute inset-0 rounded-full bg-sky-400 opacity-20 animate-ping"></div>
+        <div class="absolute inset-2 rounded-full bg-sky-300 opacity-30 animate-ping animation-delay-200"></div>
         
         <span class="text-5xl relative z-10">
           {#if status === 404}
@@ -53,7 +53,7 @@
 
     <!-- Код ошибки с градиентным текстом -->
     <div class="mb-8">
-      <h1 class="text-6xl md:text-8xl lg:text-9xl font-black mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 bg-clip-text text-transparent leading-none tracking-tight">
+      <h1 class="text-6xl md:text-8xl lg:text-9xl font-black mb-4 bg-gradient-to-r from-sky-600 via-sky-600 to-sky-800 bg-clip-text text-transparent leading-none tracking-tight">
         {status}
       </h1>
       <h2 class="text-2xl md:text-3xl font-bold text-slate-700 mb-2">
@@ -69,7 +69,7 @@
           Что-то пошло не так
         {/if}
       </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
+      <div class="w-24 h-1 bg-gradient-to-r from-sky-500 to-sky-500 mx-auto rounded-full"></div>
     </div>
 
     <!-- Описание ошибки -->
@@ -103,7 +103,7 @@
       <!-- Кнопка "На главную" -->
       <button
         on:click={goHome}
-        class="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl transition-all duration-300 font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/30 transform"
+        class="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-600 to-sky-600 hover:from-sky-700 hover:to-sky-700 text-white rounded-xl transition-all duration-300 font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/30 transform"
       >
         На главную
       </button>

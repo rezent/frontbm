@@ -71,12 +71,12 @@
     
     <!-- Badges -->
     {#if product.isNew}
-      <div class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
+      <div class="absolute top-2 left-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
         Новинка!
       </div>
     {/if}
     {#if product.discount}
-      <div class="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+      <div class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded">
         Скидка!
       </div>
     {/if}
@@ -109,7 +109,7 @@
     <!-- Add to Cart Button -->
     <button
       on:click={goToProduct}
-      class="w-full bg-sky-600 text-white py-2 px-4 rounded-lg hover:bg-sky-700 transition-colors font-medium flex items-center justify-center space-x-2"
+      class="w-full bg-sky-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors font-medium flex items-center justify-center space-x-2"
     >
       <span>Подробнее</span>
     </button>

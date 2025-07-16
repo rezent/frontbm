@@ -67,7 +67,7 @@
   ]} />
   
   <!-- Hero Section -->
-  <div class="bg-gradient-to-r from-sky-600 to-sky-700 text-white rounded-lg p-8 mb-12">
+  	<div class="bg-gradient-to-r  from-gray-800 to-gray-700 text-white rounded-lg p-8 mb-12">
     <div class="max-w-4xl mx-auto text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">Контакты</h1>
       <p class="text-xl md:text-2xl">
@@ -196,7 +196,7 @@
               id="name"
               bind:value={formData.name}
               required
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
               placeholder="Введите ваше имя"
             />
           </div>
@@ -210,7 +210,7 @@
               id="email"
               bind:value={formData.email}
               required
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
               placeholder="your@email.com"
             />
           </div>
@@ -223,7 +223,7 @@
               type="tel"
               id="phone"
               bind:value={formData.phone}
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
               placeholder="+7 (999) 123-45-67"
             />
           </div>
@@ -237,7 +237,7 @@
               bind:value={formData.message}
               required
               rows="5"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-transparent"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
               placeholder="Опишите ваш вопрос или заказ..."
             ></textarea>
           </div>
@@ -245,7 +245,7 @@
           <button
             type="submit"
             disabled={isSubmitting}
-            class="w-full bg-sky-600 hover:bg-sky-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                          class="w-full bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {#if isSubmitting}
               <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>

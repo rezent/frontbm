@@ -222,7 +222,7 @@
 				<div class="space-y-4 md:space-y-6 lg:space-y-8 text-center lg:text-left">
 					<h1 class="text-2xl md:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
 						Промышленные
-						<span class="text-blue-600">Фильтры</span>
+						<span class="text-sky-600">Фильтры</span>
 						Высшего Качества
 					</h1>
 					<p class="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
@@ -232,7 +232,7 @@
 					</p>
 					<div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
 						<button on:click={() => goto('/catalog')}
-             class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-semibold text-base md:text-lg transition-colors">
+             class="bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-semibold text-base md:text-lg transition-colors">
 							Каталог продукции
 						</button>
 						<button 
@@ -268,8 +268,8 @@
 					</div>
 
 					<!-- Floating elements -->
-					<div class="absolute -top-2 -left-2 md:-top-4 md:-left-4 w-12 h-12 md:w-24 md:h-24 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
-					<div class="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 w-16 h-16 md:w-32 md:h-32 bg-blue-300 rounded-full opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
+					<div class="absolute -top-2 -left-2 md:-top-4 md:-left-4 w-12 h-12 md:w-24 md:h-24 bg-sky-500 rounded-full opacity-20 animate-pulse"></div>
+					<div class="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 w-16 h-16 md:w-32 md:h-32 bg-sky-300 rounded-full opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
 				</div>
 			</div>
 		</div>
@@ -302,7 +302,7 @@
               </div>
               <div class="p-6">
                 <h3 class="text-xl font-semibold text-gray-900 mb-3">
-                  <a href={`/catalog/${item.id}`} class="hover:text-sky-600 transition-colors">
+                  <a href={`/catalog/${item.id}`} class="hover:text-gray-600 transition-colors">
                     {item.title}
                   </a>
                 </h3>
@@ -310,7 +310,7 @@
                   <ul class="space-y-1">
                     {#each item.features as feature}
                       <li class="text-sm text-gray-600 flex items-center">
-                        <ChevronRight class="w-4 h-4 text-sky-500 mr-2" />
+                        						<ChevronRight class="w-4 h-4 text-gray-500 mr-2" />
                         {feature}
                       </li>
                     {/each}
@@ -322,8 +322,13 @@
         </div>
       </section>
       
+
+    </main>
+  </div>
+</div>
       <!-- Certificates Section -->
       <section>
+        <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-gray-900 mb-8">Сертификаты</h2>
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
           <p class="text-gray-600 mb-6">
@@ -343,10 +348,8 @@
             </div>
           {/each}
         </div>
+        </div>
       </section>
-    </main>
-  </div>
-</div>
 
 <!-- Advantages Section -->
 <section class="bg-gray-50 py-16">
@@ -354,7 +357,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
       {#each advantages as advantage}
         <div class="text-center">
-          <div class="bg-sky-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          					<div class="bg-sky-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
             <svelte:component this={advantage.icon} class="w-8 h-8 text-white" />
           </div>
           <h3 class="text-lg font-semibold text-gray-900 mb-2">{advantage.title}</h3>
@@ -370,7 +373,7 @@
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between mb-8">
       <h2 class="text-3xl font-bold text-gray-900">Продукция</h2>
-      <a href="/catalog" class="text-sky-600 hover:text-sky-700 font-medium">
+      					<a href="/catalog" class="text-gray-600 hover:text-gray-700 font-medium">
         Все товары →
       </a>
     </div>
@@ -388,7 +391,7 @@
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between mb-8">
       <h2 class="text-3xl font-bold text-gray-900">Статьи</h2>
-      <a href="/articles" class="text-sky-600 hover:text-sky-700 font-medium">
+      				<a href="/articles" class="text-gray-600 hover:text-gray-700 font-medium">
         Все статьи →
       </a>
     </div>
@@ -399,7 +402,7 @@
           <img src={article.image} alt={article.title} class="w-full h-48 object-cover" />
           <div class="p-6">
             <h3 class="text-xl font-semibold text-gray-900 mb-3">
-              <a href={`/articles/${article.id}`} class="hover:text-sky-600 transition-colors">
+              				<a href={`/articles/${article.id}`} class="hover:text-gray-600 transition-colors">
                 {article.title}
               </a>
             </h3>
@@ -433,7 +436,7 @@
           </p>
           
           <p>
-            ООО «БМ ФИЛЬТР» и ИП Багдасаров М.А. - молодые компании, основанные в 2015 году, но не смотря на юный возраст, наши знания и производство основываются на опыте известного российского производителя фильтрационного оборудования ООО «Экспресс-Эко», основанного в 1991 года. Основатели компании - соавторы уникальных разработок в технологии производства фильтрующих элементов и фильтрационного оборудования.. <a href="/about" class="text-sky-600 hover:text-sky-700">читать далее</a>
+            ООО «БМ ФИЛЬТР» и ИП Багдасаров М.А. - молодые компании, основанные в 2015 году, но не смотря на юный возраст, наши знания и производство основываются на опыте известного российского производителя фильтрационного оборудования ООО «Экспресс-Эко», основанного в 1991 года. Основатели компании - соавторы уникальных разработок в технологии производства фильтрующих элементов и фильтрационного оборудования.. <a href="/about" class="text-gray-600 hover:text-gray-700">читать далее</a>
           </p>
         </div>
       </div>
