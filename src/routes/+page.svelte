@@ -248,7 +248,7 @@
 				<div class="relative mt-8 lg:mt-0">
 					<div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 transform rotate-1 md:rotate-2 hover:rotate-0 transition-transform duration-500">
 						<div class="bg-white p-2 md:p-4 rounded-xl md:rounded-2xl shadow-lg md:shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-rotate-2">
-							<img src="/images/exa.webp" alt="Фильтр элемент" class="w-full h-24 md:h-32 lg:h-40 object-contain rounded-lg transition-transform duration-300 hover:scale-110" />
+							<img src="/images/mbp.jpg" alt="Фильтр элемент" class="w-full h-24 md:h-32 lg:h-40 object-contain rounded-lg transition-transform duration-300 hover:scale-110" />
 						</div>
 						<div class="bg-white p-2 md:p-4 rounded-xl md:rounded-2xl shadow-lg md:shadow-xl hover:shadow-2xl transition-all duration-300 transform translate-x-1 md:translate-x-2 hover:scale-105 hover:rotate-2">
 							<img src="/images/filtroderzhateli.png" alt="Фильтр держатели" class="w-full h-24 md:h-32 lg:h-40 object-contain rounded-lg transition-transform duration-300 hover:scale-110" />
