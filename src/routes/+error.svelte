@@ -25,16 +25,18 @@
 </svelte:head>
 
 <div class="flex items-center justify-center px-4 py-8 relative overflow-hidden">
-
-
   <div class="max-w-2xl mx-auto text-center relative z-10">
     <!-- Иконка и анимация -->
     <div class="mb-8 relative">
-      <div class="inline-flex items-center justify-center w-32 h-32 mx-auto mb-6 rounded-full bg-white shadow-2xl border border-gray-200 relative">
+      <div
+        class="inline-flex items-center justify-center w-32 h-32 mx-auto mb-6 rounded-full bg-white shadow-2xl border border-gray-200 relative"
+      >
         <!-- Пульсирующее кольцо -->
         <div class="absolute inset-0 rounded-full bg-sky-400 opacity-20 animate-ping"></div>
-        <div class="absolute inset-2 rounded-full bg-sky-300 opacity-30 animate-ping animation-delay-200"></div>
-        
+        <div
+          class="absolute inset-2 rounded-full bg-sky-300 opacity-30 animate-ping animation-delay-200"
+        ></div>
+
         <span class="text-5xl relative z-10">
           {#if status === 404}
             🔍
@@ -53,7 +55,9 @@
 
     <!-- Код ошибки с градиентным текстом -->
     <div class="mb-8">
-      <h1 class="text-6xl md:text-8xl lg:text-9xl font-black mb-4 bg-gradient-to-r from-sky-600 via-sky-600 to-sky-800 bg-clip-text text-transparent leading-none tracking-tight">
+      <h1
+        class="text-6xl md:text-8xl lg:text-9xl font-black mb-4 bg-gradient-to-r from-sky-600 via-sky-600 to-sky-800 bg-clip-text text-transparent leading-none tracking-tight"
+      >
         {status}
       </h1>
       <h2 class="text-2xl md:text-3xl font-bold text-slate-700 mb-2">
@@ -76,11 +80,14 @@
     <div class="mb-10">
       <p class="text-lg md:text-xl text-slate-600 mb-6 leading-relaxed max-w-lg mx-auto">
         {#if status === 404}
-          К сожалению, запрашиваемая страница не существует или была перемещена. Возможно, вы перешли по устаревшей ссылке.
+          К сожалению, запрашиваемая страница не существует или была перемещена. Возможно, вы
+          перешли по устаревшей ссылке.
         {:else if status === 403}
-          У вас нет необходимых прав для просмотра этой страницы. Обратитесь к администратору для получения доступа.
+          У вас нет необходимых прав для просмотра этой страницы. Обратитесь к администратору для
+          получения доступа.
         {:else if status === 500}
-          Произошла внутренняя ошибка сервера. Наша команда уже работает над устранением проблемы. Попробуйте позже.
+          Произошла внутренняя ошибка сервера. Наша команда уже работает над устранением проблемы.
+          Попробуйте позже.
         {:else if status === 503}
           Сервис временно недоступен из-за технических работ. Мы скоро вернёмся в строй!
         {:else}
@@ -108,7 +115,6 @@
         На главную
       </button>
     </div>
-
   </div>
 </div>
 
@@ -116,4 +122,4 @@
   .animation-delay-200 {
     animation-delay: 200ms;
   }
-</style> 
+</style>

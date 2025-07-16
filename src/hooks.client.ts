@@ -6,4 +6,4 @@ export function init() {
       plugins: [],
     });
   }
-} 
+}

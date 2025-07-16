@@ -6,8 +6,8 @@ export const modalActions = {
   openCallbackModal: () => {
     callbackModalOpen.set(true);
   },
-  
+
   closeCallbackModal: () => {
     callbackModalOpen.set(false);
-  }
-}; 
+  },
+};

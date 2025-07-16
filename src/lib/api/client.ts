@@ -58,7 +58,7 @@ export class ApiClient {
   // Создание заголовков запроса
   private createHeaders(customHeaders?: Record<string, string>): Record<string, string> {
     const headers = { ...this.config.headers };
-    
+
     // Добавляем токен авторизации
     const token = this.getAuthToken();
     if (token) {
@@ -74,10 +74,7 @@ export class ApiClient {
   }
 
   // Основной метод для выполнения запросов
-  private async request<T>(
-    endpoint: string,
-    options: RequestOptions = {}
-  ): Promise<T> {
+  private async request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
     const url = `${this.config.baseURL}${endpoint}`;
     const headers = this.createHeaders(options.headers);
 
@@ -118,7 +115,7 @@ export class ApiClient {
       if (error instanceof ApiError) {
         throw error;
       }
-      
+
       // Обработка сетевых ошибок
       if (error instanceof TypeError && error.message.includes('fetch')) {
         throw new ApiError(0, 'Network error: Unable to connect to server');
@@ -134,8 +131,16 @@ export class ApiClient {
   }
 
   // POST запрос
-  async post<T>(endpoint: string, data?: any, options?: Omit<RequestOptions, 'method'>): Promise<T> {
-    return this.request<T>(endpoint, { ...options, method: 'POST', body: data });
+  async post<T>(
+    endpoint: string,
+    data?: any,
+    options?: Omit<RequestOptions, 'method'>
+  ): Promise<T> {
+    return this.request<T>(endpoint, {
+      ...options,
+      method: 'POST',
+      body: data,
+    });
   }
 
   // PUT запрос
@@ -144,8 +149,16 @@ export class ApiClient {
   }
 
   // PATCH запрос
-  async patch<T>(endpoint: string, data?: any, options?: Omit<RequestOptions, 'method'>): Promise<T> {
-    return this.request<T>(endpoint, { ...options, method: 'PATCH', body: data });
+  async patch<T>(
+    endpoint: string,
+    data?: any,
+    options?: Omit<RequestOptions, 'method'>
+  ): Promise<T> {
+    return this.request<T>(endpoint, {
+      ...options,
+      method: 'PATCH',
+      body: data,
+    });
   }
 
   // DELETE запрос
@@ -154,7 +167,11 @@ export class ApiClient {
   }
 
   // Загрузка файла
-  async upload<T>(endpoint: string, file: File, options?: Omit<RequestOptions, 'method'>): Promise<T> {
+  async upload<T>(
+    endpoint: string,
+    file: File,
+    options?: Omit<RequestOptions, 'method'>
+  ): Promise<T> {
     const formData = new FormData();
     formData.append('file', file);
 
@@ -197,4 +214,4 @@ export const apiClient = new ApiClient({
 });
 
 // Экспортируем типы для удобства
-export type { RequestOptions, ApiClientConfig }; 
+export type { RequestOptions, ApiClientConfig };

@@ -8,7 +8,7 @@ export const load: PageLoad = () => {
       keywords: 'фильтроэлементы, фильтры, промышленные фильтры',
       url: '/catalog/filters',
       image: '/img/page-bg.jpg',
-      type: 'website'
-    }
+      type: 'website',
+    },
   };
-}; 
+};

@@ -1,11 +1,11 @@
 <script lang="ts">
   import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
   import { Award, FileText, CheckCircle, Download, Eye } from 'lucide-svelte';
-  
+
   export let data: any;
-  
+
   $: ({ page } = data);
-  
+
   type Certificate = {
     id: number;
     title: string;
@@ -16,7 +16,7 @@
     number: string;
     type: string;
   };
-  
+
   // Данные сертификатов
   const certificates: Certificate[] = [
     {
@@ -27,7 +27,7 @@
       imageBig: '/img/certificate-img-1-big.jpg',
       date: '2024',
       number: 'РОСС RU.АГ01.Н00001',
-      type: 'ГОСТ'
+      type: 'ГОСТ',
     },
     {
       id: 2,
@@ -37,7 +37,7 @@
       imageBig: '/img/certificate-img-2-big.jpg',
       date: '2024',
       number: 'ISO-2024-001',
-      type: 'ISO'
+      type: 'ISO',
     },
     {
       id: 3,
@@ -47,7 +47,7 @@
       imageBig: '/img/certificate-img-3-big.jpg',
       date: '2024',
       number: 'БЕЗ-2024-001',
-      type: 'Безопасность'
+      type: 'Безопасность',
     },
     {
       id: 4,
@@ -57,7 +57,7 @@
       imageBig: '/img/certificate-img-4-big.jpg',
       date: '2024',
       number: 'ЭКО-2024-001',
-      type: 'Экология'
+      type: 'Экология',
     },
     {
       id: 5,
@@ -67,18 +67,18 @@
       imageBig: '/img/certificate-img-5-big.jpg',
       date: '2024',
       number: 'ПОЖ-2024-001',
-      type: 'Пожарная безопасность'
-    }
+      type: 'Пожарная безопасность',
+    },
   ];
-  
+
   let selectedCertificate: Certificate | null = null;
   let showModal = false;
-  
+
   function openCertificate(certificate: Certificate) {
     selectedCertificate = certificate;
     showModal = true;
   }
-  
+
   function closeModal() {
     showModal = false;
     selectedCertificate = null;
@@ -90,22 +90,22 @@
   <title>{page.title}</title>
   <meta name="description" content={page.description} />
   <meta name="keywords" content={page.keywords} />
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content={page.title} />
   <meta property="og:description" content={page.description} />
   <meta property="og:image" content={`${page.url}${page.image}`} />
   <meta property="og:url" content={page.url} />
   <meta property="og:type" content={page.type} />
-  
+
   <!-- Twitter -->
   <meta property="twitter:title" content={page.title} />
   <meta property="twitter:description" content={page.description} />
   <meta property="twitter:image" content={`${page.url}${page.image}`} />
-  
+
   <!-- Canonical -->
   <link rel="canonical" href={page.url} />
-  
+
   <!-- Structured Data -->
   <script type="application/ld+json">
     {
@@ -139,13 +139,15 @@
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8">
-  <Breadcrumbs breadcrumbs={[
-    { name: 'Главная', url: '/' },
-    { name: 'Сертификаты', url: '/certificates' }
-  ]} />
-  
+  <Breadcrumbs
+    breadcrumbs={[
+      { name: 'Главная', url: '/' },
+      { name: 'Сертификаты', url: '/certificates' },
+    ]}
+  />
+
   <!-- Hero Section -->
-  <div class="bg-gradient-to-r  from-gray-800 to-gray-700 text-white rounded-lg p-8 mb-12">
+  <div class="bg-gradient-to-r from-gray-800 to-gray-700 text-white rounded-lg p-8 mb-12">
     <div class="max-w-4xl mx-auto text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">Сертификаты качества</h1>
       <p class="text-xl md:text-2xl mb-8">
@@ -179,13 +181,12 @@
         <div>
           <h2 class="text-3xl font-bold text-gray-900 mb-6">О наших сертификатах</h2>
           <p class="text-lg text-gray-700 mb-6">
-            ООО «БМ ФИЛЬТР» имеет полный пакет сертификатов качества, подтверждающих 
-            соответствие нашей продукции международным и российским стандартам.
+            ООО «БМ ФИЛЬТР» имеет полный пакет сертификатов качества, подтверждающих соответствие
+            нашей продукции международным и российским стандартам.
           </p>
           <p class="text-lg text-gray-700 mb-6">
-            Все фильтроэлементы, фильтродержатели и фильтрационные установки 
-            проходят обязательную сертификацию и соответствуют требованиям 
-            ГОСТ, ISO и других нормативных документов.
+            Все фильтроэлементы, фильтродержатели и фильтрационные установки проходят обязательную
+            сертификацию и соответствуют требованиям ГОСТ, ISO и других нормативных документов.
           </p>
           <div class="flex items-center text-green-600 font-semibold">
             <CheckCircle class="w-6 h-6 mr-2" />
@@ -221,15 +222,17 @@
       <h2 class="text-3xl font-bold text-gray-900 mb-8">Наши сертификаты</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {#each certificates as certificate}
-          <div class="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
+          <div
+            class="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
+          >
             <div class="relative">
-              <img 
-                src={certificate.image} 
+              <img
+                src={certificate.image}
                 alt={certificate.title}
                 class="w-full h-48 object-cover"
               />
               <div class="absolute top-2 right-2">
-                					<span class="bg-gray-600 text-white px-2 py-1 rounded text-sm">
+                <span class="bg-gray-600 text-white px-2 py-1 rounded text-sm">
                   {certificate.type}
                 </span>
               </div>
@@ -283,30 +286,26 @@
             <li>• ГОСТ Р 51634-2000</li>
           </ul>
         </div>
-        
+
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div class="flex items-center mb-4">
             <FileText class="w-8 h-8 text-primary-600 mr-3" />
             <h3 class="text-xl font-semibold text-gray-900">ISO 9001</h3>
           </div>
-          <p class="text-gray-700 mb-4">
-            Международный стандарт системы менеджмента качества
-          </p>
+          <p class="text-gray-700 mb-4">Международный стандарт системы менеджмента качества</p>
           <ul class="text-sm text-gray-600 space-y-1">
             <li>• ISO 9001:2015</li>
             <li>• Система качества</li>
             <li>• Постоянное улучшение</li>
           </ul>
         </div>
-        
+
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div class="flex items-center mb-4">
             <FileText class="w-8 h-8 text-primary-600 mr-3" />
             <h3 class="text-xl font-semibold text-gray-900">Безопасность</h3>
           </div>
-          <p class="text-gray-700 mb-4">
-            Сертификаты безопасности и экологичности продукции
-          </p>
+          <p class="text-gray-700 mb-4">Сертификаты безопасности и экологичности продукции</p>
           <ul class="text-sm text-gray-600 space-y-1">
             <li>• Пожарная безопасность</li>
             <li>• Экологическая безопасность</li>
@@ -324,12 +323,16 @@
           Свяжитесь с нами для получения полного пакета сертификатов и технической документации
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="tel:+78007008573" 
-             class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors">
+          <a
+            href="tel:+78007008573"
+            class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors"
+          >
             +7 (800) 700-85-73
           </a>
-          <a href="/contacts" 
-             class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+          <a
+            href="/contacts"
+            class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+          >
             Написать нам
           </a>
         </div>
@@ -345,15 +348,12 @@
       <div class="p-6">
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-2xl font-bold text-gray-900">{selectedCertificate.title}</h3>
-          <button
-            on:click={closeModal}
-            class="text-gray-500 hover:text-gray-700 text-2xl"
-          >
+          <button on:click={closeModal} class="text-gray-500 hover:text-gray-700 text-2xl">
             ×
           </button>
         </div>
-        <img 
-          src={selectedCertificate.imageBig} 
+        <img
+          src={selectedCertificate.imageBig}
           alt={selectedCertificate.title}
           class="w-full rounded-lg shadow-lg"
         />
@@ -368,4 +368,4 @@
       </div>
     </div>
   </div>
-{/if} 
+{/if}

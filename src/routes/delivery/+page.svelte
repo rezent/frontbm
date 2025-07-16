@@ -1,33 +1,38 @@
 <script>
   import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
   import { Truck, Clock, MapPin, Package, CreditCard, Shield, Phone } from 'lucide-svelte';
-  
+
   export let data;
-  
+
   $: ({ page } = data);
-  
+
   // FAQ данные
   const faqs = [
     {
-      question: "Какие способы доставки доступны?",
-      answer: "Мы предлагаем доставку курьерской службой, транспортными компаниями, почтой России и самовывозом из нашего офиса в Обнинске."
+      question: 'Какие способы доставки доступны?',
+      answer:
+        'Мы предлагаем доставку курьерской службой, транспортными компаниями, почтой России и самовывозом из нашего офиса в Обнинске.',
     },
     {
-      question: "Сколько стоит доставка?",
-      answer: "Стоимость доставки зависит от веса груза, расстояния и выбранного способа доставки. При заказе от 50 000 рублей доставка бесплатная."
+      question: 'Сколько стоит доставка?',
+      answer:
+        'Стоимость доставки зависит от веса груза, расстояния и выбранного способа доставки. При заказе от 50 000 рублей доставка бесплатная.',
     },
     {
-      question: "Сколько времени занимает доставка?",
-      answer: "Время доставки зависит от региона: по Москве и области - 1-2 дня, по России - 3-7 дней, в отдаленные регионы - до 14 дней."
+      question: 'Сколько времени занимает доставка?',
+      answer:
+        'Время доставки зависит от региона: по Москве и области - 1-2 дня, по России - 3-7 дней, в отдаленные регионы - до 14 дней.',
     },
     {
-      question: "Можно ли отследить груз?",
-      answer: "Да, после отправки груза мы предоставляем трек-номер для отслеживания на сайте транспортной компании."
+      question: 'Можно ли отследить груз?',
+      answer:
+        'Да, после отправки груза мы предоставляем трек-номер для отслеживания на сайте транспортной компании.',
     },
     {
-      question: "Что делать при получении поврежденного товара?",
-      answer: "При получении поврежденного товара необходимо составить акт с водителем и сразу связаться с нами для решения вопроса."
-    }
+      question: 'Что делать при получении поврежденного товара?',
+      answer:
+        'При получении поврежденного товара необходимо составить акт с водителем и сразу связаться с нами для решения вопроса.',
+    },
   ];
 </script>
 
@@ -36,22 +41,22 @@
   <title>{page.title}</title>
   <meta name="description" content={page.description} />
   <meta name="keywords" content={page.keywords} />
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content={page.title} />
   <meta property="og:description" content={page.description} />
   <meta property="og:image" content={`${page.url}${page.image}`} />
   <meta property="og:url" content={page.url} />
   <meta property="og:type" content={page.type} />
-  
+
   <!-- Twitter -->
   <meta property="twitter:title" content={page.title} />
   <meta property="twitter:description" content={page.description} />
   <meta property="twitter:image" content={`${page.url}${page.image}`} />
-  
+
   <!-- Canonical -->
   <link rel="canonical" href={page.url} />
-  
+
   <!-- Structured Data for FAQ -->
   <script type="application/ld+json">
     {
@@ -88,18 +93,18 @@
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8">
-  <Breadcrumbs breadcrumbs={[
-    { name: 'Главная', url: '/' },
-    { name: 'Доставка и оплата', url: '/delivery' }
-  ]} />
-  
+  <Breadcrumbs
+    breadcrumbs={[
+      { name: 'Главная', url: '/' },
+      { name: 'Доставка и оплата', url: '/delivery' },
+    ]}
+  />
+
   <!-- Hero Section -->
-  <div class="bg-gradient-to-r  from-gray-800 to-gray-700 text-white rounded-lg p-8 mb-12">
+  <div class="bg-gradient-to-r from-gray-800 to-gray-700 text-white rounded-lg p-8 mb-12">
     <div class="max-w-4xl mx-auto text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">Доставка</h1>
-      <p class="text-xl md:text-2xl mb-8">
-        Быстрая и надежная доставка по всей России
-      </p>
+      <p class="text-xl md:text-2xl mb-8">Быстрая и надежная доставка по всей России</p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <div class="text-center">
           <div class="text-3xl font-bold mb-2">1-7</div>
@@ -164,9 +169,7 @@
             <MapPin class="w-8 h-8 text-primary-600 mr-3" />
             <h3 class="text-xl font-semibold text-gray-900">Почта России</h3>
           </div>
-          <p class="text-gray-700 mb-4">
-            Доставка почтой России в любую точку страны
-          </p>
+          <p class="text-gray-700 mb-4">Доставка почтой России в любую точку страны</p>
           <div class="space-y-2 text-sm text-gray-600">
             <div>• Срок: 5-14 дней</div>
             <div>• Стоимость: от 300₽</div>
@@ -180,9 +183,7 @@
             <MapPin class="w-8 h-8 text-primary-600 mr-3" />
             <h3 class="text-xl font-semibold text-gray-900">Самовывоз</h3>
           </div>
-          <p class="text-gray-700 mb-4">
-            Заберите заказ из нашего офиса в Обнинске
-          </p>
+          <p class="text-gray-700 mb-4">Заберите заказ из нашего офиса в Обнинске</p>
           <div class="space-y-2 text-sm text-gray-600">
             <div>• Срок: В день заказа</div>
             <div>• Стоимость: Бесплатно</div>
@@ -196,9 +197,7 @@
             <Clock class="w-8 h-8 text-primary-600 mr-3" />
             <h3 class="text-xl font-semibold text-gray-900">Экспресс доставка</h3>
           </div>
-          <p class="text-gray-700 mb-4">
-            Срочная доставка в течение 24 часов
-          </p>
+          <p class="text-gray-700 mb-4">Срочная доставка в течение 24 часов</p>
           <div class="space-y-2 text-sm text-gray-600">
             <div>• Срок: 24 часа</div>
             <div>• Стоимость: от 1500₽</div>
@@ -212,9 +211,7 @@
             <CreditCard class="w-8 h-8 text-primary-600 mr-3" />
             <h3 class="text-xl font-semibold text-gray-900">Бесплатная доставка</h3>
           </div>
-          <p class="text-gray-700 mb-4">
-            При заказе от 50 000 рублей доставка бесплатная
-          </p>
+          <p class="text-gray-700 mb-4">При заказе от 50 000 рублей доставка бесплатная</p>
           <div class="space-y-2 text-sm text-gray-600">
             <div>• Срок: 3-7 дней</div>
             <div>• Стоимость: 0₽</div>
@@ -229,31 +226,39 @@
       <h2 class="text-3xl font-bold text-gray-900 mb-8">Как происходит доставка</h2>
       <div class="grid md:grid-cols-4 gap-8">
         <div class="text-center">
-          <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div
+            class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
             <span class="text-2xl font-bold text-primary-600">1</span>
           </div>
           <h3 class="text-xl font-semibold text-gray-900 mb-2">Заказ</h3>
           <p class="text-gray-700">Оформляете заказ на сайте или по телефону</p>
         </div>
-        
+
         <div class="text-center">
-          <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div
+            class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
             <span class="text-2xl font-bold text-primary-600">2</span>
           </div>
           <h3 class="text-xl font-semibold text-gray-900 mb-2">Подтверждение</h3>
           <p class="text-gray-700">Мы подтверждаем заказ и уточняем детали доставки</p>
         </div>
-        
+
         <div class="text-center">
-          <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div
+            class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
             <span class="text-2xl font-bold text-primary-600">3</span>
           </div>
           <h3 class="text-xl font-semibold text-gray-900 mb-2">Отправка</h3>
           <p class="text-gray-700">Отправляем заказ выбранным способом доставки</p>
         </div>
-        
+
         <div class="text-center">
-          <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div
+            class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
             <span class="text-2xl font-bold text-primary-600">4</span>
           </div>
           <h3 class="text-xl font-semibold text-gray-900 mb-2">Получение</h3>
@@ -267,7 +272,9 @@
       <h2 class="text-3xl font-bold text-gray-900 mb-8">Условия доставки</h2>
       <div class="grid md:grid-cols-2 gap-8">
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Что включено в стоимость доставки</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            Что включено в стоимость доставки
+          </h3>
           <ul class="space-y-2 text-gray-700">
             <li class="flex items-start">
               <Shield class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
@@ -287,7 +294,7 @@
             </li>
           </ul>
         </div>
-        
+
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <h3 class="text-xl font-semibold text-gray-900 mb-4">Важная информация</h3>
           <ul class="space-y-2 text-gray-700">
@@ -333,17 +340,21 @@
           Свяжитесь с нами для получения подробной информации о доставке
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="tel:+78007008573" 
-             class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors flex items-center justify-center">
+          <a
+            href="tel:+78007008573"
+            class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors flex items-center justify-center"
+          >
             <Phone class="w-5 h-5 mr-2" />
             +7 (800) 700-85-73
           </a>
-          <a href="/contacts" 
-             class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+          <a
+            href="/contacts"
+            class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+          >
             Написать нам
           </a>
         </div>
       </div>
     </section>
   </div>
-</div> 
+</div>

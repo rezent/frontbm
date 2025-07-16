@@ -11,9 +11,11 @@
     url: 'https://tradeof.ru',
     title: 'ООО «БМ ФИЛЬТР»',
     image: '/img/logo.png',
-    description: 'ООО «БМ ФИЛЬТР» - Российский производитель современных, качественных фильтроэлементов, фильтродержателей и фильтрационных установок для решения различных задач фильтрации и микрофильтрации.'
+    description:
+      'ООО «БМ ФИЛЬТР» - Российский производитель современных, качественных фильтроэлементов, фильтродержателей и фильтрационных установок для решения различных задач фильтрации и микрофильтрации.',
   };
   $: structuredData = generateOrganizationSchema(site);
+  $: jsonLd = JSON.stringify(structuredData);
 </script>
 
 <svelte:head>
@@ -21,33 +23,35 @@
   <title>{page.title}</title>
   <meta name="description" content={page.description} />
   <meta name="keywords" content={page.keywords} />
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content={page.title} />
   <meta property="og:description" content={page.description} />
   <meta property="og:image" content={`${page.url}${page.image}`} />
   <meta property="og:url" content={page.url} />
   <meta property="og:type" content={page.type} />
-  
+
   <!-- Twitter -->
   <meta property="twitter:title" content={page.title} />
   <meta property="twitter:description" content={page.description} />
   <meta property="twitter:image" content={`${page.url}${page.image}`} />
-  
+
   <!-- Canonical -->
   <link rel="canonical" href={page.url} />
-  
+
   <!-- Structured Data -->
   <script type="application/ld+json">
-    {JSON.stringify(structuredData)}
+{@html jsonLd}
   </script>
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8">
-  <Breadcrumbs breadcrumbs={[
-    { name: 'Главная', url: '/' },
-    { name: 'О компании', url: '/about' }
-  ]} />
+  <Breadcrumbs
+    breadcrumbs={[
+      { name: 'Главная', url: '/' },
+      { name: 'О компании', url: '/about' },
+    ]}
+  />
   <!-- Hero Section -->
   <div class="bg-gradient-to-r from-gray-800 to-gray-700 text-white rounded-lg p-8 mb-12">
     <div class="max-w-4xl mx-auto text-center">
@@ -84,23 +88,24 @@
       <div class="grid md:grid-cols-2 gap-8 items-center">
         <div>
           <p class="text-lg text-gray-700 mb-6">
-            ООО «БМ ФИЛЬТР» - российский производитель современных, качественных фильтроэлементов, 
-            фильтродержателей и фильтрационных установок для решения различных задач фильтрации и микрофильтрации.
+            ООО «БМ ФИЛЬТР» - российский производитель современных, качественных фильтроэлементов,
+            фильтродержателей и фильтрационных установок для решения различных задач фильтрации и
+            микрофильтрации.
           </p>
           <p class="text-lg text-gray-700 mb-6">
-            Мы специализируемся на производстве оборудования для очистки жидкостей и газов, 
-            используя передовые технологии и материалы. Наша продукция применяется в различных 
+            Мы специализируемся на производстве оборудования для очистки жидкостей и газов,
+            используя передовые технологии и материалы. Наша продукция применяется в различных
             отраслях промышленности: пищевой, химической, фармацевтической и других.
           </p>
           <p class="text-lg text-gray-700">
-            Компания имеет собственное производство в городе Обнинск, что позволяет нам 
+            Компания имеет собственное производство в городе Обнинск, что позволяет нам
             контролировать качество на всех этапах производства и предлагать конкурентные цены.
           </p>
         </div>
         <div class="relative">
-          <img 
-            src="/img/production-img-big.jpg" 
-            alt="Производство фильтрационного оборудования" 
+          <img
+            src="/img/production-img-big.jpg"
+            alt="Производство фильтрационного оборудования"
             class="rounded-lg shadow-lg"
           />
         </div>
@@ -120,7 +125,7 @@
             Вся продукция сертифицирована и соответствует международным стандартам качества
           </p>
         </div>
-        
+
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div class="flex items-center mb-4">
             <Truck class="w-8 h-8 text-primary-600 mr-3" />
@@ -130,7 +135,7 @@
             Быстрая доставка по всей России с возможностью отслеживания груза
           </p>
         </div>
-        
+
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div class="flex items-center mb-4">
             <Clock class="w-8 h-8 text-primary-600 mr-3" />
@@ -140,17 +145,15 @@
             Изготовление продукции в кратчайшие сроки с учетом ваших требований
           </p>
         </div>
-        
+
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div class="flex items-center mb-4">
             <Shield class="w-8 h-8 text-primary-600 mr-3" />
             <h3 class="text-xl font-semibold text-gray-900">Гарантия</h3>
           </div>
-          <p class="text-gray-700">
-            Полная гарантия на всю продукцию и техническая поддержка
-          </p>
+          <p class="text-gray-700">Полная гарантия на всю продукцию и техническая поддержка</p>
         </div>
-        
+
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div class="flex items-center mb-4">
             <Users class="w-8 h-8 text-primary-600 mr-3" />
@@ -160,15 +163,13 @@
             Более 10 лет опыта в производстве фильтрационного оборудования
           </p>
         </div>
-        
+
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div class="flex items-center mb-4">
             <MapPin class="w-8 h-8 text-primary-600 mr-3" />
             <h3 class="text-xl font-semibold text-gray-900">Производство</h3>
           </div>
-          <p class="text-gray-700">
-            Собственное производство в России с полным контролем качества
-          </p>
+          <p class="text-gray-700">Собственное производство в России с полным контролем качества</p>
         </div>
       </div>
     </section>
@@ -227,4 +228,4 @@
       </div>
     </section>
   </div>
-</div> 
+</div>

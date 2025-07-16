@@ -1,0 +1,13 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore build directories
+dist/
+build/
+.svelte-kit/
+
+# Ignore files with complex JSON-LD structures that cause parsing issues
+# These files contain script tags with @html expressions that Prettier can't parse correctly
+src/lib/components/SEO.svelte
+src/routes/about/+page.svelte
+src/routes/contacts/+page.svelte 

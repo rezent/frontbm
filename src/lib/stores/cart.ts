@@ -29,10 +29,11 @@ function loadCartFromStorage(): CartItem[] {
 // Функция для получения уникального ключа товара с опциями
 export const getItemKey = (item: CartItem): string => {
   // Проверяем, есть ли реальные опции (не пустой объект)
-  const hasRealOptions = item.selectedOptions && 
-    Object.keys(item.selectedOptions).length > 0 && 
+  const hasRealOptions =
+    item.selectedOptions &&
+    Object.keys(item.selectedOptions).length > 0 &&
     Object.values(item.selectedOptions).some(value => value && value !== '');
-  
+
   if (hasRealOptions && item.selectedOptions) {
     const optionsKey = Object.entries(item.selectedOptions)
       .filter(([key, value]) => value && value !== '') // Исключаем пустые значения
@@ -40,27 +41,27 @@ export const getItemKey = (item: CartItem): string => {
       .map(([key, value]) => `${key}:${value}`)
       .join('|');
     const key = `${item.id}_${optionsKey}`;
-    
+
     const keyInfo: ItemKeyInfo = {
       id: item.id,
       options: item.selectedOptions,
       hasRealOptions,
       optionsKey,
-      finalKey: key
+      finalKey: key,
     };
-    
+
     return key;
   }
-  
+
   const key = `${item.id}_no_options`;
   const keyInfo: ItemKeyInfo = {
     id: item.id,
     options: item.selectedOptions,
     hasRealOptions: false,
     optionsKey: '',
-    finalKey: key
+    finalKey: key,
   };
-  
+
   return key;
 };
 
@@ -88,64 +89,66 @@ export const cartActions: CartActions = {
     cart.update((items: CartItem[]) => {
       // Создаем уникальный ключ для товара с опциями
       const itemKey = getItemKey(item);
-      
+
       const existingItem = items.find((i: CartItem) => getItemKey(i) === itemKey);
       if (existingItem) {
-        const updatedItems = items.map((i: CartItem) => 
+        const updatedItems = items.map((i: CartItem) =>
           getItemKey(i) === itemKey
-            ? { 
-                ...i, 
+            ? {
+                ...i,
                 quantity: i.quantity + item.quantity,
-                totalPrice: i.totalPrice 
-                  ? (i.totalPrice / i.quantity) * (i.quantity + item.quantity) 
-                  : (item.price * (i.quantity + item.quantity))
+                totalPrice: i.totalPrice
+                  ? (i.totalPrice / i.quantity) * (i.quantity + item.quantity)
+                  : item.price * (i.quantity + item.quantity),
               }
             : i
         );
         return updatedItems;
       }
-      
+
       const newItems = [...items, item];
       return newItems;
     });
   },
 
   removeItem: (itemKey: string) => {
-    cart.update((items: CartItem[]) => 
+    cart.update((items: CartItem[]) =>
       items.filter((item: CartItem) => getItemKey(item) !== itemKey)
     );
   },
 
   updateQuantity: (itemKey: string, quantity: number) => {
-    cart.update((items: CartItem[]) => 
-      items.map((item: CartItem) => 
-        getItemKey(item) === itemKey
-          ? { 
-              ...item, 
-              quantity: Math.max(0, quantity),
-              totalPrice: item.totalPrice 
-                ? (item.totalPrice / item.quantity) * Math.max(0, quantity) 
-                : (item.price * Math.max(0, quantity))
-            }
-          : item
-      ).filter((item: CartItem) => item.quantity > 0)
+    cart.update((items: CartItem[]) =>
+      items
+        .map((item: CartItem) =>
+          getItemKey(item) === itemKey
+            ? {
+                ...item,
+                quantity: Math.max(0, quantity),
+                totalPrice: item.totalPrice
+                  ? (item.totalPrice / item.quantity) * Math.max(0, quantity)
+                  : item.price * Math.max(0, quantity),
+              }
+            : item
+        )
+        .filter((item: CartItem) => item.quantity > 0)
     );
   },
 
   clearCart: () => {
     cart.set([]);
-  }
+  },
 };
 
 // Вычисляемые значения для корзины
-export const cartTotal: Readable<number> = derived(cart, ($cart: CartItem[]) => 
+export const cartTotal: Readable<number> = derived(cart, ($cart: CartItem[]) =>
   $cart.reduce((total: number, item: CartItem) => {
     // Используем totalPrice если есть, иначе считаем по старой логике
-    const itemTotal = item.totalPrice || (item.price * item.quantity);
+    const itemTotal = item.totalPrice || item.price * item.quantity;
     return total + itemTotal;
   }, 0)
 );
 
-export const cartCount: Readable<number> = derived(cart, ($cart: CartItem[]) => 
+export const cartCount: Readable<number> = derived(cart, ($cart: CartItem[]) =>
   $cart.reduce((count: number, item: CartItem) => count + item.quantity, 0)
-); 
+);

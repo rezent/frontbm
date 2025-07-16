@@ -30,31 +30,31 @@
     heightTo: '',
     micronFrom: '',
     micronTo: '',
-    parameters: []
+    parameters: [],
   };
 
   const filterTypes: FilterType[] = [
     { value: '1', label: 'Наименование 1' },
     { value: '2', label: 'Наименование 2' },
-    { value: '3', label: 'Наименование 3' }
+    { value: '3', label: 'Наименование 3' },
   ];
 
   const substances: FilterType[] = [
     { value: '1', label: 'Наименование 1' },
     { value: '2', label: 'Наименование 2' },
-    { value: '3', label: 'Наименование 3' }
+    { value: '3', label: 'Наименование 3' },
   ];
 
   const headers: FilterType[] = [
     { value: '1', label: 'Наименование 1' },
     { value: '2', label: 'Наименование 2' },
-    { value: '3', label: 'Наименование 3' }
+    { value: '3', label: 'Наименование 3' },
   ];
 
   const parameters: Parameter[] = [
     { id: 'parameter-1', label: 'Параметр 1' },
     { id: 'parameter-2', label: 'Параметр 2' },
-    { id: 'parameter-3', label: 'Параметр 3' }
+    { id: 'parameter-3', label: 'Параметр 3' },
   ];
 
   function updateFilters() {
@@ -118,7 +118,7 @@
       heightTo: '',
       micronFrom: '',
       micronTo: '',
-      parameters: []
+      parameters: [],
     };
     updateFilters();
   }
@@ -255,7 +255,7 @@
                 type="checkbox"
                 id={parameter.id}
                 checked={filters.parameters.includes(parameter.id)}
-                on:change={(e) => handleParameterChange(parameter.id, e)}
+                on:change={e => handleParameterChange(parameter.id, e)}
                 class="w-5 h-5 text-gray-600 bg-white border-gray-300 rounded focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               />
               <span class="text-sm text-gray-700">{parameter.label}</span>
@@ -265,4 +265,4 @@
       </fieldset>
     </div>
   </div>
-</aside> 
+</aside>

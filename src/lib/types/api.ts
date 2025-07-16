@@ -250,32 +250,32 @@ export const API_ENDPOINTS = {
   logout: '/api/auth/logout',
   refresh: '/api/auth/refresh',
   profile: '/api/auth/profile',
-  
+
   // Products
   products: '/api/products',
   product: (id: string) => `/api/products/${id}`,
   productReviews: (id: string) => `/api/products/${id}/reviews`,
-  
+
   // Categories
   categories: '/api/categories',
   category: (id: string) => `/api/categories/${id}`,
-  
+
   // Cart
   cart: '/api/cart',
   cartItem: (id: string) => `/api/cart/${id}`,
-  
+
   // Orders
   orders: '/api/orders',
   order: (id: string) => `/api/orders/${id}`,
-  
+
   // Search
   search: '/api/search',
-  
+
   // Reviews
   reviews: '/api/reviews',
   review: (id: string) => `/api/reviews/${id}`,
-  
+
   // Notifications
   notifications: '/api/notifications',
-  notification: (id: string) => `/api/notifications/${id}`
-} as const; 
+  notification: (id: string) => `/api/notifications/${id}`,
+} as const;

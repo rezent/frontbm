@@ -14,7 +14,7 @@ import type {
   Review,
   Notification,
   ApiResponse,
-  PaginatedResponse
+  PaginatedResponse,
 } from '$lib/types/api';
 
 // Сервис для аутентификации
@@ -50,10 +50,9 @@ export class AuthService {
       throw new Error('No refresh token available');
     }
 
-    const response = await apiClient.post<ApiResponse<AuthResponse>>(
-      API_ENDPOINTS.refresh,
-      { refreshToken }
-    );
+    const response = await apiClient.post<ApiResponse<AuthResponse>>(API_ENDPOINTS.refresh, {
+      refreshToken,
+    });
     return response.data;
   }
 
@@ -63,10 +62,7 @@ export class AuthService {
   }
 
   static async updateProfile(userData: Partial<User>): Promise<User> {
-    const response = await apiClient.put<ApiResponse<User>>(
-      API_ENDPOINTS.profile,
-      userData
-    );
+    const response = await apiClient.put<ApiResponse<User>>(API_ENDPOINTS.profile, userData);
     return response.data;
   }
 }
@@ -75,12 +71,12 @@ export class AuthService {
 export class ProductService {
   static async getProducts(params?: SearchParams): Promise<PaginatedResponse<Product>> {
     const queryParams = new URLSearchParams();
-    
+
     if (params?.query) queryParams.append('query', params.query);
     if (params?.sort) queryParams.append('sort', params.sort);
     if (params?.page) queryParams.append('page', params.page.toString());
     if (params?.limit) queryParams.append('limit', params.limit.toString());
-    
+
     if (params?.filters) {
       Object.entries(params.filters).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
@@ -94,9 +90,7 @@ export class ProductService {
   }
 
   static async getProduct(id: string): Promise<Product> {
-    const response = await apiClient.get<ApiResponse<Product>>(
-      API_ENDPOINTS.product(id)
-    );
+    const response = await apiClient.get<ApiResponse<Product>>(API_ENDPOINTS.product(id));
     return response.data;
   }
 
@@ -107,7 +101,10 @@ export class ProductService {
     return response.data;
   }
 
-  static async createReview(productId: string, review: Omit<Review, 'id' | 'productId' | 'userId' | 'createdAt' | 'updatedAt'>): Promise<Review> {
+  static async createReview(
+    productId: string,
+    review: Omit<Review, 'id' | 'productId' | 'userId' | 'createdAt' | 'updatedAt'>
+  ): Promise<Review> {
     const response = await apiClient.post<ApiResponse<Review>>(
       API_ENDPOINTS.productReviews(productId),
       review
@@ -116,10 +113,10 @@ export class ProductService {
   }
 
   static async searchProducts(query: string, filters?: SearchFilters): Promise<Product[]> {
-    const response = await apiClient.post<ApiResponse<Product[]>>(
-      API_ENDPOINTS.search,
-      { query, filters }
-    );
+    const response = await apiClient.post<ApiResponse<Product[]>>(API_ENDPOINTS.search, {
+      query,
+      filters,
+    });
     return response.data;
   }
 }
@@ -127,26 +124,25 @@ export class ProductService {
 // Сервис для работы с категориями
 export class CategoryService {
   static async getCategories(): Promise<Category[]> {
-    const response = await apiClient.get<ApiResponse<Category[]>>(
-      API_ENDPOINTS.categories
-    );
+    const response = await apiClient.get<ApiResponse<Category[]>>(API_ENDPOINTS.categories);
     return response.data;
   }
 
   static async getCategory(id: string): Promise<Category> {
-    const response = await apiClient.get<ApiResponse<Category>>(
-      API_ENDPOINTS.category(id)
-    );
+    const response = await apiClient.get<ApiResponse<Category>>(API_ENDPOINTS.category(id));
     return response.data;
   }
 
-  static async getCategoryProducts(categoryId: string, params?: Omit<SearchParams, 'category'>): Promise<PaginatedResponse<Product>> {
+  static async getCategoryProducts(
+    categoryId: string,
+    params?: Omit<SearchParams, 'category'>
+  ): Promise<PaginatedResponse<Product>> {
     const queryParams = new URLSearchParams();
-    
+
     if (params?.sort) queryParams.append('sort', params.sort);
     if (params?.page) queryParams.append('page', params.page.toString());
     if (params?.limit) queryParams.append('limit', params.limit.toString());
-    
+
     if (params?.filters) {
       Object.entries(params.filters).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
@@ -163,17 +159,12 @@ export class CategoryService {
 // Сервис для работы с корзиной
 export class CartService {
   static async getCart(): Promise<CartItem[]> {
-    const response = await apiClient.get<ApiResponse<CartItem[]>>(
-      API_ENDPOINTS.cart
-    );
+    const response = await apiClient.get<ApiResponse<CartItem[]>>(API_ENDPOINTS.cart);
     return response.data;
   }
 
   static async addToCart(item: Omit<CartItem, 'id'>): Promise<CartItem> {
-    const response = await apiClient.post<ApiResponse<CartItem>>(
-      API_ENDPOINTS.cart,
-      item
-    );
+    const response = await apiClient.post<ApiResponse<CartItem>>(API_ENDPOINTS.cart, item);
     return response.data;
   }
 
@@ -197,39 +188,29 @@ export class CartService {
 // Сервис для работы с заказами
 export class OrderService {
   static async getOrders(): Promise<Order[]> {
-    const response = await apiClient.get<ApiResponse<Order[]>>(
-      API_ENDPOINTS.orders
-    );
+    const response = await apiClient.get<ApiResponse<Order[]>>(API_ENDPOINTS.orders);
     return response.data;
   }
 
   static async getOrder(id: string): Promise<Order> {
-    const response = await apiClient.get<ApiResponse<Order>>(
-      API_ENDPOINTS.order(id)
-    );
+    const response = await apiClient.get<ApiResponse<Order>>(API_ENDPOINTS.order(id));
     return response.data;
   }
 
-  static async createOrder(orderData: Omit<Order, 'id' | 'userId' | 'createdAt' | 'updatedAt'>): Promise<Order> {
-    const response = await apiClient.post<ApiResponse<Order>>(
-      API_ENDPOINTS.orders,
-      orderData
-    );
+  static async createOrder(
+    orderData: Omit<Order, 'id' | 'userId' | 'createdAt' | 'updatedAt'>
+  ): Promise<Order> {
+    const response = await apiClient.post<ApiResponse<Order>>(API_ENDPOINTS.orders, orderData);
     return response.data;
   }
 
   static async updateOrder(id: string, updates: Partial<Order>): Promise<Order> {
-    const response = await apiClient.put<ApiResponse<Order>>(
-      API_ENDPOINTS.order(id),
-      updates
-    );
+    const response = await apiClient.put<ApiResponse<Order>>(API_ENDPOINTS.order(id), updates);
     return response.data;
   }
 
   static async cancelOrder(id: string): Promise<Order> {
-    const response = await apiClient.patch<ApiResponse<Order>>(
-      `${API_ENDPOINTS.order(id)}/cancel`
-    );
+    const response = await apiClient.patch<ApiResponse<Order>>(`${API_ENDPOINTS.order(id)}/cancel`);
     return response.data;
   }
 }
@@ -237,9 +218,7 @@ export class OrderService {
 // Сервис для работы с уведомлениями
 export class NotificationService {
   static async getNotifications(): Promise<Notification[]> {
-    const response = await apiClient.get<ApiResponse<Notification[]>>(
-      API_ENDPOINTS.notifications
-    );
+    const response = await apiClient.get<ApiResponse<Notification[]>>(API_ENDPOINTS.notifications);
     return response.data;
   }
 
@@ -258,5 +237,3 @@ export class NotificationService {
     await apiClient.delete(API_ENDPOINTS.notification(id));
   }
 }
-
- 

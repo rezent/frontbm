@@ -43,7 +43,7 @@ export const GET: RequestHandler = async () => {
 
   return new Response(sitemap, {
     headers: {
-      'Content-Type': 'application/xml'
-    }
+      'Content-Type': 'application/xml',
+    },
   });
-}; 
+};
