@@ -25,7 +25,7 @@ export function generateOrganizationSchema(site: SiteInfo): Record<string, unkno
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "ООО «Трейд ОФ»",
+    "name": "ООО «БМ ФИЛЬТР»",
     "url": site.url,
     "logo": `${site.url}${site.image}`,
     "description": site.description,
@@ -59,7 +59,7 @@ export function generateWebsiteSchema(site: SiteInfo): Record<string, unknown> {
     "description": site.description,
     "publisher": {
       "@type": "Organization",
-      "name": "ООО «Трейд ОФ»",
+      "name": "ООО «БМ ФИЛЬТР»",
       "logo": {
         "@type": "ImageObject",
         "url": `${site.url}${site.image}`
@@ -185,7 +185,7 @@ export function generateContactSchema(site: SiteInfo): Record<string, unknown> {
     "url": `${site.url}/contacts`,
     "mainEntity": {
       "@type": "Organization",
-      "name": "ООО «Трейд ОФ»",
+      "name": "ООО «БМ ФИЛЬТР»",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Обнинск",

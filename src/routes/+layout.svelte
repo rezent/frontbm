@@ -17,8 +17,8 @@
   <!-- SEO Meta Tags -->
   <title>{site.title}</title>
   <meta name="description" content={site.description} />
-  <meta name="keywords" content="фильтроэлементы, фильтродержатели, фильтрационные установки, микрофильтрация, оборудование для фильтрации, Трейд ОФ" />
-  <meta name="author" content="ООО «Трейд ОФ»" />
+  <meta name="keywords" content="фильтроэлементы, фильтродержатели, фильтрационные установки, микрофильтрация, оборудование для фильтрации, БМ ФИЛЬТР" />
+  <meta name="author" content="ООО «БМ ФИЛЬТР»" />
   <meta name="robots" content="index, follow" />
   <meta name="language" content="ru" />
   
@@ -29,7 +29,7 @@
   <meta property="og:description" content={site.description} />
   <meta property="og:image" content={`${site.url}${site.image}`} />
   <meta property="og:locale" content={site.locale} />
-  <meta property="og:site_name" content="Трейд ОФ" />
+  <meta property="og:site_name" content="БМ ФИЛЬТР" />
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
@@ -56,7 +56,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "ООО «Трейд ОФ»",
+      "name": "ООО «БМ ФИЛЬТР»",
       "url": "{site.url}",
       "logo": "{site.url}{site.image}",
       "description": "{site.description}",

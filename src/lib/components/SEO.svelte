@@ -14,7 +14,7 @@
   // Данные сайта
   const site = {
     url: 'https://tradeof.ru',
-    title: 'Оборудование для микрофильтрации - Трейд ОФ',
+    title: 'Оборудование для микрофильтрации - БМ ФИЛЬТР',
     description: 'Российский производитель современных, качественных фильтроэлементов, фильтродержателей и фильтрационных установок',
     image: '/img/logo.png',
     locale: 'ru_RU'
@@ -46,7 +46,7 @@
   <meta property="og:url" content={fullUrl} />
   <meta property="og:type" content={type} />
   <meta property="og:locale" content={site.locale} />
-  <meta property="og:site_name" content="Трейд ОФ" />
+  <meta property="og:site_name" content="БМ ФИЛЬТР" />
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />

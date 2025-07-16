@@ -2,7 +2,6 @@
   import { cart, cartCount, cartTotal, cartActions, getItemKey } from '$lib/stores/cart';
   import type { CartItem } from '$lib/types/api';
   import { callbackModalOpen, modalActions } from '$lib/stores/modal.js';
-  import { ShoppingCart, Phone, User, Menu, Search, X, Trash2 } from 'lucide-svelte';
   import { onMount, onDestroy } from 'svelte';
   import { goto } from '$app/navigation';
   import CallbackModal from './CallbackModal.svelte';
@@ -12,8 +11,10 @@
 	let showCatalogMenu = false;
 	let showPagesMenu = false;
 	let showUserMenu = false;
+	let showCartDropdown = false;
+	let cartHoverTimeout: number | null = null;
 	let isScrolled = false;
-	let showCallbackModal = false;
+
 	
 	// Mock user state - in real app this would come from a store
 	let isLoggedIn = false;
@@ -30,6 +31,7 @@
 				showCatalogMenu = false;
 				showPagesMenu = false;
 				showUserMenu = false;
+				showCartDropdown = false;
 			}
 		};
 		
@@ -40,6 +42,12 @@
 			window.removeEventListener('scroll', handleScroll);
 			document.removeEventListener('click', handleClickOutside);
 		};
+	});
+
+	onDestroy(() => {
+		if (cartHoverTimeout) {
+			clearTimeout(cartHoverTimeout);
+		}
 	});
   // Инициализация темы при загрузке
   onMount(() => {
@@ -83,13 +91,7 @@
     mobileMenuOpen = !mobileMenuOpen;
   }
   
-  function openCallbackModal() {
-    modalActions.openCallbackModal();
-  }
-  
-  function closeCallbackModal() {
-    modalActions.closeCallbackModal();
-  }
+
 
   function removeFromCart(item: CartItem) {
     const itemKey = getItemKey(item);
@@ -113,6 +115,34 @@
     const option = item.options[optionType]?.find(opt => opt.id === optionId);
     return option?.name || (optionId ? String(optionId) : '');
   }
+
+  function formatPrice(price: number): string {
+    return new Intl.NumberFormat('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(price);
+  }
+
+  function getTotalItemPrice(item: CartItem): number {
+    return item.totalPrice || (item.price * item.quantity);
+  }
+
+  function showCart() {
+    if (cartHoverTimeout) {
+      clearTimeout(cartHoverTimeout);
+      cartHoverTimeout = null;
+    }
+    showCartDropdown = true;
+  }
+
+  function hideCart() {
+    cartHoverTimeout = setTimeout(() => {
+      showCartDropdown = false;
+    }, 150);
+  }
+
 </script>
 
 <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 {isScrolled ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5' : 'bg-transparent'}">
@@ -354,17 +384,150 @@
 
 
 
-					<!-- Cart -->
-					<a href="/cart" class="relative p-2.5 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200">
-						<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" aria-label="Корзина">
-							<path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
-						</svg>
-						<span class="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">3</span>
-					</a>
+					<!-- Cart Dropdown -->
+					<div 
+						class="relative dropdown"
+						role="navigation"
+						aria-label="Корзина покупок"
+						on:mouseenter={showCart}
+						on:mouseleave={hideCart}
+					>
+						<button 
+							class="relative p-2.5 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 cursor-pointer border-0 bg-transparent"
+							on:click={() => goto('/cart')}
+							aria-label="Открыть корзину покупок"
+						>
+							<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" aria-label="Корзина">
+								<path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+							</svg>
+							{#if $cartCount > 0}
+								<span class="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">{$cartCount}</span>
+							{/if}
+						</button>
+
+						<!-- Cart Dropdown Content -->
+						{#if showCartDropdown && $cartCount > 0}
+							<div 
+								class="absolute top-full right-0 mt-2 w-96 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden"
+							>
+								<!-- Header -->
+								<div class="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
+									<div class="flex items-center justify-between">
+										<h3 class="text-lg font-bold text-gray-900">Корзина</h3>
+										<span class="text-sm text-gray-500">{$cartCount} {$cartCount === 1 ? 'товар' : $cartCount < 5 ? 'товара' : 'товаров'}</span>
+									</div>
+								</div>
+
+								<!-- Cart Items -->
+								<div class="max-h-80 overflow-y-auto">
+									{#each $cart.slice(0, 5) as item (getItemKey(item))}
+										<div class="flex items-center space-x-4 p-4 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0">
+											<!-- Product Image -->
+											<div class="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-lg overflow-hidden">
+												{#if item.images && item.images.length > 0}
+													<img 
+														src={item.mainImage || item.images[0]} 
+														alt={item.title}
+														class="w-full h-full object-cover"
+													/>
+												{:else}
+													<div class="w-full h-full flex items-center justify-center">
+														<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+															<path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+														</svg>
+													</div>
+												{/if}
+											</div>
+
+											<!-- Product Info -->
+											<div class="flex-1 min-w-0">
+												<h4 class="text-sm font-semibold text-gray-900 truncate">{item.title}</h4>
+												{#if item.selectedOptions}
+													<div class="text-xs text-gray-500 mt-1">
+														{#each Object.entries(item.selectedOptions) as [type, optionId]}
+															{#if optionId}
+																<span class="inline-block mr-2">{getOptionName(item, type)}</span>
+															{/if}
+														{/each}
+													</div>
+												{/if}
+												<div class="flex items-center justify-between mt-2">
+													<span class="text-sm font-medium text-gray-900">{formatPrice(getTotalItemPrice(item))}</span>
+													<div class="flex items-center space-x-2">
+																											<button 
+														on:click|stopPropagation={() => updateCartQuantity(item, item.quantity - 1)}
+														class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors"
+														aria-label="Уменьшить количество"
+													>
+															<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+																<path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+															</svg>
+														</button>
+														<span class="text-sm font-medium text-gray-900 min-w-[20px] text-center">{item.quantity}</span>
+																											<button 
+														on:click|stopPropagation={() => updateCartQuantity(item, item.quantity + 1)}
+														class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors"
+														aria-label="Увеличить количество"
+													>
+															<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+																<path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+															</svg>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									{/each}
+									
+									<!-- Show "More items" indicator if cart has more than 5 items -->
+									{#if $cart.length > 5}
+										<div class="px-4 py-3 text-center text-sm text-gray-500 bg-gray-50 border-t">
+											и ещё {$cart.length - 5} {$cart.length - 5 === 1 ? 'товар' : ($cart.length - 5) < 5 ? 'товара' : 'товаров'}...
+										</div>
+									{/if}
+								</div>
+
+								<!-- Footer -->
+								<div class="px-6 py-4 border-t border-gray-100 bg-gray-50/50">
+									<div class="flex items-center justify-between mb-3">
+										<span class="text-sm font-medium text-gray-600">Итого:</span>
+										<span class="text-lg font-bold text-gray-900">{formatPrice($cartTotal)}</span>
+									</div>
+									<button 
+										on:click|stopPropagation={() => goto('/cart')}
+										class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+									>
+										Перейти в корзину
+									</button>
+								</div>
+							</div>
+						{:else if showCartDropdown && $cartCount === 0}
+							<!-- Empty Cart -->
+							<div 
+								class="absolute top-full right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 p-6 z-50"
+							>
+								<div class="text-center">
+									<div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+										<svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+											<path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+										</svg>
+									</div>
+									<h3 class="text-lg font-semibold text-gray-900 mb-2">Корзина пуста</h3>
+									<p class="text-gray-500 text-sm mb-4">Добавьте товары из каталога</p>
+									<button 
+										on:click|stopPropagation={() => goto('/catalog')}
+										class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105"
+									>
+										Перейти в каталог
+									</button>
+								</div>
+							</div>
+						{/if}
+					</div>
 
 					<!-- CTA Button -->
 					<button 
-						on:click|stopPropagation={openCallbackModal}
+						on:click|stopPropagation={modalActions.openCallbackModal}
 						class="hidden sm:block bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 -mr-2"
 					>
 						Заказать звонок
@@ -441,7 +604,7 @@
 				<!-- Mobile CTA -->
 				<div class="mt-6 pt-6 border-t border-gray-200">
 					<button 
-						on:click|stopPropagation={openCallbackModal}
+						on:click|stopPropagation={modalActions.openCallbackModal}
 						class="w-full bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white py-4 rounded-xl font-semibold shadow-lg transform hover:scale-105 transition-all duration-200"
 					>
 						Заказать звонок
@@ -456,4 +619,4 @@
 <div class="h-32"></div>
 
 <!-- Callback Modal -->
-<CallbackModal bind:isOpen={showCallbackModal} /> 
+<CallbackModal isOpen={$callbackModalOpen} on:close={modalActions.closeCallbackModal} /> 

@@ -16,7 +16,7 @@
           <img src="/img/logo.png" alt="Логотип" class="h-12 w-auto" />
         </a>
         <p class="text-gray-400 text-sm">
-          ООО «Трейд ОФ» - Российский производитель современных, качественных фильтроэлементов, фильтродержателей и фильтрационных установок.
+          ООО «БМ ФИЛЬТР» - Российский производитель современных, качественных фильтроэлементов, фильтродержателей и фильтрационных установок.
         </p>
         <div class="flex space-x-4">
           <button class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
@@ -95,7 +95,7 @@
     <div class="border-t border-gray-800 mt-8 pt-8">
       <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
         <div class="text-sm text-gray-400">
-          <p>© 2015-2024. Группа Компаний ООО "Трейд ОФ" и "Тех ОФ"</p>
+          <p>© 2015-2024. Группа Компаний ООО "БМ ФИЛЬТР" и ИП Багдасаров М.А.</p>
           <p>Все права защищены.</p>
         </div>
         <div class="text-sm text-gray-400">

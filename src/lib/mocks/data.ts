@@ -4,7 +4,6 @@ import type {
   User,
   Review,
   Notification,
-  ProductOption,
   ProductOptions,
   ProductSpecification
 } from '$lib/types/api';
