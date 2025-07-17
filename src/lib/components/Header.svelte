@@ -565,7 +565,7 @@
                   </div>
                 </div>
 
-                <!-- Cart Items -->
+                <!-- Cart Items D -->
                 <div class="max-h-80 overflow-y-auto">
                   {#each $cart.slice(0, 5) as item (getItemKey(item))}
                     <div
