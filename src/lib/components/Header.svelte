@@ -17,7 +17,7 @@
 
   // Mock user state - in real app this would come from a store
   let isLoggedIn = false;
-  let userName = 'Иван Петров';
+  let userName = 'Игорь А';
 
   onMount(() => {
     const handleScroll = () => {
@@ -152,11 +152,11 @@
   <!-- Top contact bar -->
   <div class="bg-gray-900 text-white py-2.5 text-sm">
     <div class="container mx-auto px-4 md:px-6 lg:px-8">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
+      <div class="flex flex-col min-[361px]:flex-row min-[361px]:items-center min-[361px]:justify-between gap-2">
         <!-- Contact info -->
-        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+        <div class="flex flex-row items-center justify-between min-[479px]:justify-start gap-2 sm:gap-4 flex-1 whitespace-nowrap">
           <a
-            href="tel:+78001234567"
+            href="tel:+79807131111"
             class="flex items-center space-x-2 hover:text-gray-300 transition-colors"
           >
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -164,10 +164,10 @@
                 d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
               />
             </svg>
-            <span>8 (800) 123-45-67</span>
+            <span>8 (980) 713-11-11</span>
           </a>
           <a
-            href="mailto:info@filterpro.ru"
+            href="mailto:inbox@bmfilter.ru"
             class="flex items-center space-x-2 hover:text-gray-300 transition-colors"
           >
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -178,8 +178,8 @@
           </a>
         </div>
 
-        <!-- User account -->
-        <div class="flex items-center space-x-4">
+        <!-- User account - скрыт на экранах менее 361px -->
+        <div class="hidden min-[479px]:flex items-center justify-end space-x-4">
           {#if isLoggedIn}
             <!-- Logged in user -->
             <div class="relative dropdown">
@@ -432,7 +432,7 @@
 
           <a
             href="/about"
-            class="px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200"
+            class="px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200 whitespace-nowrap"
           >
             О нас
           </a>
@@ -552,7 +552,7 @@
             <!-- Cart Dropdown Content -->
             {#if showCartDropdown && $cartCount > 0}
               <div
-                class="absolute top-full right-0 mt-2 w-96 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden"
+                class="absolute top-full left-1/2 -translate-x-1/2 min-[500px]:left-auto min-[500px]:translate-x-0 min-[500px]:right-0 mt-2 w-80 min-[500px]:w-96 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden"
               >
                 <!-- Header -->
                 <div class="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
@@ -682,7 +682,7 @@
             {:else if showCartDropdown && $cartCount === 0}
               <!-- Empty Cart -->
               <div
-                class="absolute top-full right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 p-6 z-50"
+                class="absolute top-full left-1/2 -translate-x-1/2 min-[500px]:left-auto min-[500px]:translate-x-0 min-[500px]:right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 p-6 z-50"
               >
                 <div class="text-center">
                   <div
@@ -710,9 +710,26 @@
           <!-- CTA Button -->
           <button
             on:click|stopPropagation={modalActions.openCallbackModal}
-            class="hidden sm:block bg-gradient-to-r bg-sky-700 hover:from-sky-800 hover:to-sky-900 text-white px-4 py-2.5 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 -mr-2"
+            class="hidden sm:flex items-center justify-center bg-gradient-to-r bg-sky-700 hover:from-sky-800 hover:to-sky-900 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 -mr-2 2xl:px-4 2xl:py-2.5 px-2.5 py-2.5"
+            aria-label="Заказать звонок"
           >
-            Заказать звонок
+            <!-- Иконка для экранов < 1536px -->
+            <svg 
+              class="w-5 h-5 2xl:hidden" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+              aria-label="Телефон"
+            >
+              <path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                stroke-width="2" 
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              />
+            </svg>
+            <!-- Текст для экранов >= 1536px -->
+            <span class="hidden 2xl:block">Заказать звонок</span>
           </button>
 
           <!-- Mobile menu toggle -->
@@ -740,6 +757,7 @@
       class="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-200 shadow-xl"
     >
       <div class="container mx-auto px-4 py-6">
+
         <!-- Mobile search -->
         <div class="mb-6">
           <div class="relative">
@@ -764,7 +782,7 @@
         </div>
 
         <!-- Mobile navigation -->
-        <nav class="space-y-2">
+        <nav class="space-y-2 border-b border-gray-200">
           <a
             href="/catalog"
             class="flex items-center space-x-3 p-4 rounded-xl hover:bg-gray-100 text-gray-900 font-medium transition-all duration-200"
@@ -828,6 +846,101 @@
             <span>Доставка и оплата</span>
           </a>
         </nav>
+        <!-- Mobile User Account - показан только на экранах менее 361px -->
+        <div class="min-[479px]:hidden mb-6 pb-6">
+          {#if isLoggedIn}
+            <!-- Logged in user -->
+            <div class="space-y-2">
+              <div class="flex items-center space-x-3 p-4 bg-gray-50 rounded-xl">
+                <svg class="w-6 h-6 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="font-medium text-gray-900">{userName}</span>
+              </div>
+              
+              <a
+                href="/profile"
+                class="flex items-center space-x-3 p-4 rounded-xl hover:bg-gray-100 text-gray-900 font-medium transition-all duration-200"
+              >
+                <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Мой профиль</span>
+              </a>
+              <a
+                href="/orders"
+                class="flex items-center space-x-3 p-4 rounded-xl hover:bg-gray-100 text-gray-900 font-medium transition-all duration-200"
+              >
+                <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+                  />
+                </svg>
+                <span>Мои заказы</span>
+              </a>
+              <a
+                href="/favorites"
+                class="flex items-center space-x-3 p-4 rounded-xl hover:bg-gray-100 text-gray-900 font-medium transition-all duration-200"
+              >
+                <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Избранное</span>
+              </a>
+              <button
+                on:click={() => (isLoggedIn = false)}
+                class="flex items-center space-x-3 p-4 w-full text-left rounded-xl hover:bg-red-50 hover:text-red-600 text-gray-900 font-medium transition-all duration-200"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Выйти</span>
+              </button>
+            </div>
+          {:else}
+            <!-- Login/Register links -->
+            <div class="space-y-2">
+              <button
+                on:click={() => (isLoggedIn = true)}
+                class="flex items-center space-x-3 p-4 w-full text-left rounded-xl hover:bg-gray-100 text-gray-900 font-medium transition-all duration-200"
+              >
+                <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Вход</span>
+              </button>
+              <a 
+                href="/register" 
+                class="flex items-center space-x-3 p-4 rounded-xl hover:bg-gray-100 text-gray-900 font-medium transition-all duration-200"
+              >
+                <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/>
+                </svg>
+                <span>Регистрация</span>
+              </a>
+            </div>
+          {/if}
+        </div>
 
         <!-- Mobile CTA -->
         <div class="mt-6 pt-6 border-t border-gray-200">
