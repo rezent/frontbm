@@ -1,16 +1,11 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-auto';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
-    adapter: adapter({
-      strict: false
-    }),
+    adapter: adapter(),
     files: {
       routes: './src/app/routes',
-    },
-    prerender: {
-      entries: ['*']
     },
     alias: {
       $lib: './src/lib',
