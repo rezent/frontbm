@@ -23,7 +23,7 @@
 
   $: fullUrl = url ? `${site.url}${url}` : $page.url.href;
   $: fullImage = image ? `${site.url}${image}` : `${site.url}${site.image}`;
-  $: jsonLd = structuredData ? JSON.stringify(structuredData) : '';
+  // $: jsonLd = structuredData ? JSON.stringify(structuredData) : ''; // Пока не используется
 </script>
 
 <svelte:head>

@@ -1,12 +1,15 @@
 {
-  "name": "BM Filter - Фильтрующие элементы",
-  "short_name": "BM Filter",
-  "description": "Качественные фильтрующие элементы для промышленного применения",
+  "name": "Каталог товаров",
+  "short_name": "Каталог",
+  "description": "Интернет-магазин с каталогом товаров",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#3B82F6",
+  "theme_color": "#000000",
   "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ru",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/img/favicon/favicon.ico",
@@ -15,7 +18,7 @@
     },
     {
       "src": "/img/favicon/apple-touch-icon.png",
-      "sizes": "180x180",
+      "sizes": "57x57",
       "type": "image/png"
     },
     {
@@ -27,9 +30,22 @@
       "src": "/img/favicon/apple-touch-icon-114x114.png",
       "sizes": "114x114",
       "type": "image/png"
+    },
+    {
+      "src": "/images/logo/logo-dark.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo/logo-white.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "categories": ["business", "shopping"],
-  "lang": "ru",
-  "dir": "ltr"
-}
+  "categories": ["shopping", "business"],
+  "screenshots": [],
+  "related_applications": [],
+  "prefer_related_applications": false
+} 

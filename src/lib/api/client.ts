@@ -1,4 +1,5 @@
-import { API_ENDPOINTS, type ApiResponse, type PaginatedResponse } from '$lib/types/api';
+// Этот файл содержит старый API клиент - для совместимости
+// В FSD архитектуре используем src/shared/api/base.ts
 
 // Конфигурация API
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';

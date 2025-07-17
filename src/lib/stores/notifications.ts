@@ -1,4 +1,4 @@
-import { writable, derived, type Writable, type Readable } from 'svelte/store';
+import { writable, derived, type Readable } from 'svelte/store';
 import type { Notification } from '$lib/types/api';
 import { NotificationService } from '$lib/api/services';
 

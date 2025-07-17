@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { cart, cartCount, cartTotal, cartActions, getItemKey } from '$lib/stores/cart';
-  import type { CartItem } from '$lib/types/api';
+  import { cart, cartCount, cartTotal, cartActions, getItemKey } from '@entities/cart'; // ← ИСПРАВЛЕНО: используем FSD store
+  import type { CartItem } from '@shared/types'; // ← ИСПРАВЛЕНО: используем FSD типы
   import { callbackModalOpen, modalActions } from '$lib/stores/modal.js';
   import { onMount, onDestroy } from 'svelte';
   import { goto } from '$app/navigation';
@@ -69,19 +69,20 @@
     }
   }
 
-  function setTheme(t: Theme) {
-    theme = t;
-    if (typeof localStorage !== 'undefined') localStorage.setItem('theme', t);
-    applyTheme(t);
-  }
+  // Пока не используется - закомментировано
+  // function setTheme(t: Theme) {
+  //   theme = t;
+  //   if (typeof localStorage !== 'undefined') localStorage.setItem('theme', t);
+  //   applyTheme(t);
+  // }
 
-  let mobileMenuOpen = false;
-  let isSticky = false;
-  let searchQuery = '';
+  // let mobileMenuOpen = false; // Пока не используется
+  // let isSticky = false; // Пока не используется
+  // let searchQuery = ''; // Пока не используется
 
   onMount(() => {
     const handleScroll = () => {
-      isSticky = window.scrollY > 100;
+      // isSticky = window.scrollY > 100;
     };
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -89,14 +90,15 @@
     };
   });
 
-  function toggleMobileMenu() {
-    mobileMenuOpen = !mobileMenuOpen;
-  }
+  // Пока не используется - закомментировано
+  // function toggleMobileMenu() {
+  //   mobileMenuOpen = !mobileMenuOpen;
+  // }
 
-  function removeFromCart(item: CartItem) {
-    const itemKey = getItemKey(item);
-    cartActions.removeItem(itemKey);
-  }
+  // function removeFromCart(item: CartItem) {
+  //   const itemKey = getItemKey(item);
+  //   cartActions.removeItem(itemKey);
+  // }
 
   function updateCartQuantity(item: CartItem, newQuantity: number) {
     const itemKey = getItemKey(item);

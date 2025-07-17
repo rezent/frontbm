@@ -1,18 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://bmfilter.ru/sitemap.xml
-
-# Disallow admin and private areas
-Disallow: /admin/
-Disallow: /api/
-Disallow: /private/
-
-# Allow important pages
-Allow: /catalog/
-Allow: /product/
-Allow: /about/
-Allow: /contact/
-Allow: /delivery/
-Allow: /payment/ 
+Sitemap: https://yourdomain.com/sitemap.xml 

@@ -1,4 +1,4 @@
-import { writable, derived, type Writable, type Readable } from 'svelte/store';
+import { writable, derived, type Readable } from 'svelte/store';
 import type { User, AuthResponse, LoginRequest, RegisterRequest } from '$lib/types/api';
 import { AuthService } from '$lib/api/services';
 

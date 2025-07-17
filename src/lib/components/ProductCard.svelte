@@ -1,33 +1,62 @@
 <script lang="ts">
-  import { cartActions } from '$lib/stores/cart';
-  import { Eye, ShoppingCart } from 'lucide-svelte';
-  import type { Product, CartItem } from '$lib/types/api';
+  // import { cartActions } from '$lib/stores/cart'; // Пока не используется
+  import { Eye, ChevronLeft, ChevronRight } from 'lucide-svelte';
+  import type { Product } from '$lib/types/api';
   import { goto } from '$app/navigation';
 
   export let product: Product;
   export let showImageModal: boolean = false;
 
   let imageModalOpen: boolean = false;
+  let currentImageIndex: number = 0;
 
-  function addToCart() {
-    const cartItem: CartItem = {
-      ...product,
-      productId: product.id,
-      quantity: 1,
-      selectedOptions: {},
-      totalPrice: product.price,
-    };
-    cartActions.addItem(cartItem);
-  }
+  // Пока не используется - закомментировано
+  // function addToCart() {
+  //   const cartItem: CartItem = {
+  //     id: product.id,
+  //     title: product.title,
+  //     price: product.price,
+  //     quantity: 1,
+  //     selectedOptions: {},
+  //     options: product.options
+  //   };
+  //   cartActions.addItem(cartItem);
+  // }
 
   function openImageModal() {
     imageModalOpen = true;
     showImageModal = true;
+    currentImageIndex = 0; // Начинаем с первого изображения
   }
 
   function closeImageModal() {
     imageModalOpen = false;
     showImageModal = false;
+    currentImageIndex = 0;
+  }
+
+  function nextImage() {
+    if (product.images && product.images.length > 1) {
+      currentImageIndex = (currentImageIndex + 1) % product.images.length;
+    }
+  }
+
+  function prevImage() {
+    if (product.images && product.images.length > 1) {
+      currentImageIndex = currentImageIndex === 0 ? product.images.length - 1 : currentImageIndex - 1;
+    }
+  }
+
+  function handleModalKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      closeImageModal();
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      nextImage();
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      prevImage();
+    }
   }
 
   function handleBackdropKeydown(event: KeyboardEvent) {
@@ -39,7 +68,13 @@
   function goToProduct() {
     goto(`/product/${product.id}`);
   }
+
+  // Получаем текущее изображение
+  $: currentImage = product.images?.[currentImageIndex] || product.images?.[0] || '/img/placeholder.jpg';
+  $: hasMultipleImages = product.images && product.images.length > 1;
 </script>
+
+<svelte:window on:keydown={imageModalOpen ? handleModalKeydown : undefined} />
 
 <div
   class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
@@ -135,14 +170,17 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="image-modal-title"
+      tabindex="0"
+      on:click|stopPropagation
+      on:keydown|stopPropagation
     >
+      <!-- Close Button -->
       <button
         on:click={closeImageModal}
-        on:click|stopPropagation
-        class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+        class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10 bg-black/50 rounded-full p-2"
         aria-label="Закрыть модальное окно"
       >
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -151,12 +189,62 @@
           ></path>
         </svg>
       </button>
+
+      <!-- Previous Image Button -->
+      {#if hasMultipleImages}
+        <button
+          on:click={prevImage}
+          class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-10 bg-black/50 rounded-full p-3 hover:bg-black/70"
+          aria-label="Предыдущее изображение"
+        >
+          <ChevronLeft class="w-6 h-6" />
+        </button>
+      {/if}
+
+      <!-- Next Image Button -->
+      {#if hasMultipleImages}
+        <button
+          on:click={nextImage}
+          class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-10 bg-black/50 rounded-full p-3 hover:bg-black/70"
+          aria-label="Следующее изображение"
+        >
+          <ChevronRight class="w-6 h-6" />
+        </button>
+      {/if}
+
+      <!-- Main Image -->
       <img
         id="image-modal-title"
-        src={product.images?.[0] || '/img/placeholder.jpg'}
-        alt={product.title}
-        class="w-full h-auto rounded-lg shadow-lg"
+        src={currentImage}
+        alt="{product.title} - изображение {currentImageIndex + 1}"
+        class="w-full h-auto rounded-lg shadow-lg max-h-[80vh] object-contain"
       />
+
+      <!-- Image Counter -->
+      {#if hasMultipleImages}
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+          {currentImageIndex + 1} / {product.images.length}
+        </div>
+      {/if}
+
+      <!-- Thumbnail Navigation -->
+      {#if hasMultipleImages}
+        <div class="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-black/50 rounded-lg p-2">
+          {#each product.images as image, index}
+            <button
+              on:click={() => currentImageIndex = index}
+              class="w-12 h-12 rounded border-2 transition-all {currentImageIndex === index ? 'border-white' : 'border-gray-400 hover:border-gray-200'}"
+              aria-label="Переключиться на изображение {index + 1}"
+            >
+              <img
+                src={image}
+                alt="{product.title} - миниатюра {index + 1}"
+                class="w-full h-full object-cover rounded"
+              />
+            </button>
+          {/each}
+        </div>
+      {/if}
     </div>
   </div>
 {/if}

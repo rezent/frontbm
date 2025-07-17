@@ -1,15 +1,8 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store';
-import type { CartItem as CartItemType, SelectedOptions, ProductOptions } from '$lib/types/api';
+import type { CartItem as CartItemType } from '$lib/types/api';
 export type CartItem = CartItemType;
 
-// Тип для ключа товара
-interface ItemKeyInfo {
-  id: string;
-  options: SelectedOptions | undefined;
-  hasRealOptions: boolean;
-  optionsKey: string;
-  finalKey: string;
-}
+// ItemKeyInfo удален - интерфейс не используется
 
 // Функция для загрузки корзины из localStorage
 function loadCartFromStorage(): CartItem[] {
@@ -36,32 +29,16 @@ export const getItemKey = (item: CartItem): string => {
 
   if (hasRealOptions && item.selectedOptions) {
     const optionsKey = Object.entries(item.selectedOptions)
-      .filter(([key, value]) => value && value !== '') // Исключаем пустые значения
+      .filter(([, value]) => value && value !== '') // Исключаем пустые значения
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([key, value]) => `${key}:${value}`)
       .join('|');
     const key = `${item.id}_${optionsKey}`;
 
-    const keyInfo: ItemKeyInfo = {
-      id: item.id,
-      options: item.selectedOptions,
-      hasRealOptions,
-      optionsKey,
-      finalKey: key,
-    };
-
     return key;
   }
 
   const key = `${item.id}_no_options`;
-  const keyInfo: ItemKeyInfo = {
-    id: item.id,
-    options: item.selectedOptions,
-    hasRealOptions: false,
-    optionsKey: '',
-    finalKey: key,
-  };
-
   return key;
 };
 
